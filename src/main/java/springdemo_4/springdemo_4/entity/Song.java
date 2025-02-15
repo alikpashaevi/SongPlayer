@@ -10,7 +10,7 @@ public class Song {
 
     @Id
     @GeneratedValue(generator = "song_seq_gen", strategy = GenerationType.SEQUENCE)
-    private long id;
+    private Long id;
 
     @Column(name = "name")
     private String name;
@@ -19,13 +19,13 @@ public class Song {
     private String artist;
 
     @Column(name = "duration")
-    private double duration;
+    private Double duration;
 
     @ManyToOne
     @JoinColumn(name = "playlist_id")
     private Playlist playlist;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -45,11 +45,11 @@ public class Song {
         this.artist = artist;
     }
 
-    public double getDuration() {
+    public Double getDuration() {
         return duration;
     }
 
-    public void setDuration(double duration) {
+    public void setDuration(Double duration) {
         this.duration = duration;
     }
 

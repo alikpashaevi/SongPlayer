@@ -1,17 +1,17 @@
 package springdemo_4.springdemo_4.model;
 
 public class PlaylistDTO {
-    private long id;
+    private Long id;
     private String name;
     private int ReleaseYear;
 
-    public PlaylistDTO(long id, String name, int ReleaseYear) {
+    public PlaylistDTO(Long id, String name, int ReleaseYear) {
         this.id = id;
         this.name = name;
         this.ReleaseYear = ReleaseYear;
     }
 
-    public long getId() {return id;}
+    public Long getId() {return id;}
 
     public String getName() {
         return name;

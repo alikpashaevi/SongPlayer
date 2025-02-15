@@ -10,7 +10,7 @@ public class Playlist {
 
     @Id
     @GeneratedValue(generator = "playlist_seq_gen", strategy = GenerationType.SEQUENCE)
-    private long id;
+    private Long id;
 
     @Column(name = "name")
     private String name;
@@ -18,7 +18,7 @@ public class Playlist {
     @Column(name = "release_year")
     private int releaseYear;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

@@ -41,7 +41,7 @@ public class SongService {
         return songRepository.findSongs(PageRequest.of(page, pageSize));
     }
 
-    public SongDTO getSong(long id) {
+    public SongDTO getSong(Long id) {
         Song song = songRepository.findById(id).get();
         return mapSong(song);
     }
@@ -55,7 +55,7 @@ public class SongService {
         songRepository.save(newSong);
     }
 
-    public void updateSong(long id, SongRequest request) {
+    public void updateSong(Long id, SongRequest request) {
         Song song = songRepository.findById(id).get();
         song.setName(request.getName());
         song.setArtist(request.getArtist());
@@ -66,7 +66,7 @@ public class SongService {
         songRepository.save(song);
     }
 
-    public void deleteSong(long id) {
+    public void deleteSong(Long id) {
         songRepository.deleteById(id);
     }
 

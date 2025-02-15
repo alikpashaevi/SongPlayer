@@ -25,7 +25,7 @@ public class SongController {
     }
 
     @GetMapping("/{id}")
-    public SongDTO getSong(@PathVariable long id) {
+    public SongDTO getSong(@PathVariable Long id) {
         return songService.getSong(id);
     }
 
@@ -36,13 +36,13 @@ public class SongController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updateSong(@PathVariable int id, @RequestBody SongRequest request) {
+    public ResponseEntity<Object> updateSong(@PathVariable Long id, @RequestBody SongRequest request) {
         songService.updateSong(id, request);
         return ResponseEntity.ok("Song updated successfully");
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteSong(@PathVariable int id) {
+    public ResponseEntity<String> deleteSong(@PathVariable Long id) {
         songService.deleteSong(id);
         return ResponseEntity.ok("Song deleted successfully");
     }
