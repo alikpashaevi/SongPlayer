@@ -15,15 +15,16 @@ public class Song {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "artist")
-    private String artist;
-
     @Column(name = "duration")
     private Double duration;
 
     @ManyToOne
     @JoinColumn(name = "playlist_id")
     private Playlist playlist;
+
+    @ManyToOne
+    @JoinColumn(name = "artist_id")
+    private Artist artist;
 
     public Long getId() {
         return id;
@@ -35,14 +36,6 @@ public class Song {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getArtist() {
-        return artist;
-    }
-
-    public void setArtist(String artist) {
-        this.artist = artist;
     }
 
     public Double getDuration() {
@@ -59,5 +52,13 @@ public class Song {
 
     public void setPlaylist(Playlist playlist) {
         this.playlist = playlist;
+    }
+
+    public Artist getArtist() {
+        return artist;
+    }
+
+    public void setArtist(Artist artist) {
+        this.artist = artist;
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.web.server.ResponseStatusException;
 import springdemo_4.springdemo_4.entity.PlaylistRepository;
 import springdemo_4.springdemo_4.entity.Song;
 import springdemo_4.springdemo_4.entity.SongRepository;
+import springdemo_4.springdemo_4.model.ArtistDTO;
 import springdemo_4.springdemo_4.model.PlaylistDTO;
 import springdemo_4.springdemo_4.model.SongDTO;
 import springdemo_4.springdemo_4.model.SongRequest;
@@ -21,18 +22,25 @@ public class SongService {
 
     private final SongRepository songRepository;
     private final PlaylistService playlistService;
+    private final ArtistService artistService;
 
-    public SongService(SongRepository songRepository, PlaylistService playlistService) {
+    public SongService(SongRepository songRepository, PlaylistService playlistService, ArtistService artistService) {
         this.songRepository = songRepository;
         this.playlistService = playlistService;
+        this.artistService = artistService;
     }
 
     private SongDTO mapSong(Song song) {
-        return new SongDTO(song.getId(), song.getName(), song.getArtist(), song.getDuration(),
+        return new SongDTO(song.getId(), song.getName(), song.getDuration(),
                 new PlaylistDTO(
                         song.getPlaylist().getId(),
                         song.getPlaylist().getName(),
                         song.getPlaylist().getReleaseYear()
+                ),
+                new ArtistDTO(
+                        song.getArtist().getId(),
+                        song.getArtist().getName(),
+                        song.getArtist().getMonthlyListeners()
                 )
         );
     }
@@ -49,7 +57,7 @@ public class SongService {
     public void addSong(SongRequest request) {
         Song newSong = new Song();
         newSong.setName(request.getName());
-        newSong.setArtist(request.getArtist());
+        newSong.setArtist(artistService.findArtist(request.getArtistId()));
         newSong.setDuration(request.getDuration());
         newSong.setPlaylist(playlistService.findPlaylist(request.getPlaylistId()));
         songRepository.save(newSong);
@@ -58,10 +66,12 @@ public class SongService {
     public void updateSong(Long id, SongRequest request) {
         Song song = songRepository.findById(id).get();
         song.setName(request.getName());
-        song.setArtist(request.getArtist());
         song.setDuration(request.getDuration());
         if (request.getPlaylistId() != song.getPlaylist().getId()) {
             song.setPlaylist(playlistService.findPlaylist(request.getPlaylistId()));
+        }
+        if (request.getArtistId() != song.getArtist().getId()) {
+            song.setArtist(artistService.findArtist(request.getArtistId()));
         }
         songRepository.save(song);
     }

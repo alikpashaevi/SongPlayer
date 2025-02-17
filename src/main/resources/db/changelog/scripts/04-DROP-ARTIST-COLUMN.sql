@@ -1,0 +1,2 @@
+ALTER TABLE songs.song
+DROP COLUMN ARTIST;

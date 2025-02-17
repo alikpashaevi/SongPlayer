@@ -9,11 +9,13 @@ import springdemo_4.springdemo_4.model.SongDTO;
 
 public interface SongRepository extends JpaRepository<Song, Long> {
     @Query(
-            "SELECT NEW springdemo_4.springdemo_4.model.SongDTO" +
-                    "(s.id, s.name, s.artist, s.duration, " +
-                    "new springdemo_4.springdemo_4.model.PlaylistDTO" +
-                    "(p.id, p.name, p.releaseYear)) " +
-                    "FROM Song s JOIN s.playlist p"
+            "SELECT NEW springdemo_4.springdemo_4.model.SongDTO(" +
+                    "s.id, s.name, s.duration, " +
+                    "NEW springdemo_4.springdemo_4.model.PlaylistDTO(p.id, p.name, p.releaseYear), " +
+                    "NEW springdemo_4.springdemo_4.model.ArtistDTO(a.id, a.name, a.monthlyListeners)) " +
+                    "FROM Song s " +
+                    "JOIN s.playlist p " +
+                    "JOIN s.artist a"
     )
     Page<SongDTO> findSongs(Pageable pageable);
 }

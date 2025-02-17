@@ -1,0 +1,6 @@
+ALTER TABLE songs.song
+ADD COLUMN ARTIST_ID BIGINT NOT NULL;
+
+ALTER TABLE songs.song
+ADD CONSTRAINT fk_artist
+FOREIGN KEY (artist_id) REFERENCES songs.artist(ID);

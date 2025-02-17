@@ -2,9 +2,9 @@ package springdemo_4.springdemo_4.model;
 
 public class SongRequest {
     private String name;
-    private String artist;
     private Double duration;
     private Long playlistId;
+    private Long artistId;
 
     public String getName() {
         return name;
@@ -14,12 +14,12 @@ public class SongRequest {
         this.name = name;
     }
 
-    public String getArtist() {
-        return artist;
+    public Long getArtistId() {
+        return artistId;
     }
 
-    public void setArtist(String artist) {
-        this.artist = artist;
+    public void setArtistId(Long artistId) {
+        this.artistId = artistId;
     }
 
     public Double getDuration() {
