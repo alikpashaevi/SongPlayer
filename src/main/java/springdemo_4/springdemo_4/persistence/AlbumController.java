@@ -13,34 +13,34 @@ public class AlbumController {
 
     private final AlbumService albumService;
 
-    public AlbumController(AlbumService playlistAlbumService) {
-        this.albumService = playlistAlbumService;
+    public AlbumController(AlbumService AlbumService) {
+        this.albumService = AlbumService;
     }
 
     @GetMapping
-    public Page<AlbumDTO> getPlaylists(int page, int pageSize) {
+    public Page<AlbumDTO> getAlbums(int page, int pageSize) {
         return albumService.getAlbums(page, pageSize);
     }
 
     @GetMapping("/{id}")
-    public Album getPlaylist(Long id) {
+    public Album getAlbum(Long id) {
         return albumService.findAlbum(id);
     }
 
     @PostMapping
-    ResponseEntity<Void> createPlaylist(@RequestBody AlbumRequest request) {
+    ResponseEntity<Void> createAlbum(@RequestBody AlbumRequest request) {
         albumService.createAlbum(request);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping("/{id}")
-    ResponseEntity<Void> updatePlaylist(@PathVariable Long id, @RequestBody AlbumRequest request) {
+    ResponseEntity<Void> updateAlbum(@PathVariable Long id, @RequestBody AlbumRequest request) {
         albumService.updateAlbum(id, request);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
-    ResponseEntity<Void> deletePlaylist(@PathVariable Long id) {
+    ResponseEntity<Void> deleteAlbum(@PathVariable Long id) {
         albumService.deleteAlbum(id);
         return ResponseEntity.ok().build();
     }
