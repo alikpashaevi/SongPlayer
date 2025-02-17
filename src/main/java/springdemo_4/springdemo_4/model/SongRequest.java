@@ -3,7 +3,7 @@ package springdemo_4.springdemo_4.model;
 public class SongRequest {
     private String name;
     private Double duration;
-    private Long playlistId;
+    private Long AlbumId;
     private Long artistId;
 
     public String getName() {
@@ -30,11 +30,11 @@ public class SongRequest {
         this.duration = duration;
     }
 
-    public Long getPlaylistId() {
-        return playlistId;
+    public Long getAlbumId() {
+        return AlbumId;
     }
 
-    public void setPlaylistId(Long playlistId) {
-        this.playlistId = playlistId;
+    public void setAlbumId(Long AlbumId) {
+        this.AlbumId = AlbumId;
     }
 }

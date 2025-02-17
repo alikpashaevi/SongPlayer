@@ -7,3 +7,9 @@ databaseChangeLog:
       file: db/changelog/scripts/03-ALTER-SONGS-TABLE-ARTIST.sql
   - include:
       file: db/changelog/scripts/04-DROP-ARTIST-COLUMN.sql
+  - include:
+        file: db/changelog/scripts/05-RENAME-PLAYLIST-TABLE-AS-ALBUM.sql
+  - include:
+      file: db/changelog/scripts/06-CREAT-NEW-SEQUENCE-FOR-ALBUM.sql
+  - include:
+        file: db/changelog/scripts/07-RENAME-PLAYLISTID-COLUMN.sql

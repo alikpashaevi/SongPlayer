@@ -4,12 +4,12 @@ package springdemo_4.springdemo_4.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "playlist")
-@SequenceGenerator(name = "playlist_seq_gen", sequenceName = "playlist_seq", allocationSize = 1)
-public class Playlist {
+@Table(name = "album")
+@SequenceGenerator(name = "album_seq_gen", sequenceName = "album_seq", allocationSize = 1)
+public class Album {
 
     @Id
-    @GeneratedValue(generator = "playlist_seq_gen", strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(generator = "album_seq_gen", strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Column(name = "name")

@@ -1,9 +1,8 @@
 package springdemo_4.springdemo_4.model;
 
-public class PlaylistRequest {
+public class AlbumRequest {
     private String name;
     private int releaseYear;
-
     public String getName() {
         return name;
     }

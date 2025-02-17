@@ -1,11 +1,11 @@
 package springdemo_4.springdemo_4.model;
 
-public class PlaylistDTO {
+public class AlbumDTO {
     private Long id;
     private String name;
     private int ReleaseYear;
 
-    public PlaylistDTO(Long id, String name, int ReleaseYear) {
+    public AlbumDTO(Long id, String name, int ReleaseYear) {
         this.id = id;
         this.name = name;
         this.ReleaseYear = ReleaseYear;

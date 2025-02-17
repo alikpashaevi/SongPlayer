@@ -1,20 +1,18 @@
 package springdemo_4.springdemo_4.model;
 
-import springdemo_4.springdemo_4.entity.Artist;
-
 public class SongDTO {
     private Long id;
     private String name;
     private Double duration;
-    private PlaylistDTO playlist;
+    private AlbumDTO album;
     private ArtistDTO artist;
 
 
-    public SongDTO(Long id, String name, Double duration, PlaylistDTO playlist, ArtistDTO artist) {
+    public SongDTO(Long id, String name, Double duration, AlbumDTO album, ArtistDTO artist) {
         this.id = id;
         this.name = name;
         this.duration = duration;
-        this.playlist = playlist;
+        this.album = album;
         this.artist = artist;
     }
 
@@ -34,8 +32,8 @@ public class SongDTO {
         return duration;
     }
 
-    public PlaylistDTO getPlaylist() {
-        return playlist;
+    public AlbumDTO getAlbum() {
+        return album;
     }
 
     public void setId(Long id) {
@@ -54,14 +52,14 @@ public class SongDTO {
         this.duration = duration;
     }
 
-    public void setPlaylist(PlaylistDTO playlist) {
-        this.playlist = playlist;
+    public void setAlbum(AlbumDTO album) {
+        this.album = album;
     }
 
     public void printDetails() {
         System.out.println("Name: " + name);
         System.out.println("Artist: " + artist);
         System.out.println("Duration: " + duration);
-        System.out.println("Playlist: " + playlist.getName());
+        System.out.println("Playlist: " + album.getName());
     }
 }

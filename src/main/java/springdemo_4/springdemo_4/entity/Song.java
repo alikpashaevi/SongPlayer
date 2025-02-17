@@ -19,8 +19,8 @@ public class Song {
     private Double duration;
 
     @ManyToOne
-    @JoinColumn(name = "playlist_id")
-    private Playlist playlist;
+    @JoinColumn(name = "album_id")
+    private Album album;
 
     @ManyToOne
     @JoinColumn(name = "artist_id")
@@ -46,12 +46,12 @@ public class Song {
         this.duration = duration;
     }
 
-    public Playlist getPlaylist() {
-        return playlist;
+    public Album getAlbum() {
+        return album;
     }
 
-    public void setPlaylist(Playlist playlist) {
-        this.playlist = playlist;
+    public void setAlbum(Album album) {
+        this.album = album;
     }
 
     public Artist getArtist() {

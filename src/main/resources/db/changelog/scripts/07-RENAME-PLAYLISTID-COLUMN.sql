@@ -1,0 +1,1 @@
+ALTER TABLE songs.song RENAME COLUMN playlist_id TO album_id;

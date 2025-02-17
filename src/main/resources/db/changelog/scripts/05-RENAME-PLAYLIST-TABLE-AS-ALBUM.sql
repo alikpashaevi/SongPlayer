@@ -1,0 +1,1 @@
+ALTER TABLE songs.playlist RENAME TO album;
