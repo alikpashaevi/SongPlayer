@@ -13,3 +13,5 @@ databaseChangeLog:
       file: db/changelog/scripts/06-CREAT-NEW-SEQUENCE-FOR-ALBUM.sql
   - include:
         file: db/changelog/scripts/07-RENAME-PLAYLISTID-COLUMN.sql
+  - include:
+        file: db/changelog/scripts/08-ADD-ARTIST-ID-TO-ALBUM.sql

@@ -18,8 +18,20 @@ public class Album {
     @Column(name = "release_year")
     private int releaseYear;
 
+    @ManyToOne
+    @JoinColumn(name = "artist_id", nullable = false)
+    private Artist artist;
+
     public Long getId() {
         return id;
+    }
+
+    public Artist getArtist() {
+        return artist;
+    }
+
+    public void setArtist(Artist artist) {
+        this.artist = artist;
     }
 
     public String getName() {

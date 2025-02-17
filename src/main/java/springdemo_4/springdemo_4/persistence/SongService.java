@@ -27,12 +27,14 @@ public class SongService {
                 new AlbumDTO(
                         song.getAlbum().getId(),
                         song.getAlbum().getName(),
-                        song.getAlbum().getReleaseYear()
+                        song.getAlbum().getReleaseYear(),
+                        null
                 ),
                 new ArtistDTO(
                         song.getArtist().getId(),
                         song.getArtist().getName(),
-                        song.getArtist().getMonthlyListeners()
+                        song.getArtist().getMonthlyListeners(),
+                        null
                 )
         );
     }

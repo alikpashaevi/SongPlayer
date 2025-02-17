@@ -3,6 +3,8 @@ package springdemo_4.springdemo_4.model;
 public class AlbumRequest {
     private String name;
     private int releaseYear;
+    private Long artistId;
+
     public String getName() {
         return name;
     }
@@ -17,6 +19,14 @@ public class AlbumRequest {
 
     public void setReleaseYear(int releaseYear) {
         this.releaseYear = releaseYear;
+    }
+
+    public Long getArtistId() {
+        return artistId;
+    }
+
+    public void setArtistId(Long artistId) {
+        this.artistId = artistId;
     }
 
 }
