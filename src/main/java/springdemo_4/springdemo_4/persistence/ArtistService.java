@@ -3,10 +3,16 @@ package springdemo_4.springdemo_4.persistence;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import springdemo_4.springdemo_4.entity.Album;
 import springdemo_4.springdemo_4.entity.Artist;
 import springdemo_4.springdemo_4.entity.ArtistRepository;
+import springdemo_4.springdemo_4.model.AlbumDTO;
 import springdemo_4.springdemo_4.model.ArtistDTO;
 import springdemo_4.springdemo_4.model.ArtistRequest;
+import springdemo_4.springdemo_4.model.ArtistSimpleDTO;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ArtistService {
@@ -18,8 +24,34 @@ public class ArtistService {
     }
 
     public Page<ArtistDTO> getArtists(int page, int pageSize) {
-        return artistRepository.findArtists(PageRequest.of(page, pageSize));
+//        return artistRepository.findArtists(PageRequest.of(page, pageSize));
+        Page<Artist> artists = artistRepository.findArtists(PageRequest.of(page, pageSize));
+        return artists.map(this::convertToArtistDTO);
     }
+
+    private ArtistDTO convertToArtistDTO(Artist artist) {
+        ArtistSimpleDTO artistSimpleDTO = new ArtistSimpleDTO(
+                artist.getId(),
+                artist.getName(),
+                artist.getMonthlyListeners()
+        );
+
+        return new ArtistDTO(
+                artist.getId(),
+                artist.getName(),
+                artist.getMonthlyListeners(),
+                artist.getAlbums().stream()
+                        .map(album -> new AlbumDTO(
+                                album.getId(),
+                                album.getName(),
+                                album.getReleaseYear(),
+                                artistSimpleDTO
+                        ))
+                        .collect(Collectors.toList())
+        );
+    }
+
+
 
     public Artist findArtist(Long id) {
         return artistRepository.findById(id).get();

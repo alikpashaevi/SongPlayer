@@ -4,9 +4,9 @@ public class AlbumDTO {
     private Long id;
     private String name;
     private int ReleaseYear;
-    private ArtistDTO artist;
+    private ArtistSimpleDTO artist;
 
-    public AlbumDTO(Long id, String name, int ReleaseYear, ArtistDTO artist) {
+    public AlbumDTO(Long id, String name, int ReleaseYear, ArtistSimpleDTO artist) {
         this.id = id;
         this.name = name;
         this.ReleaseYear = ReleaseYear;
@@ -23,7 +23,7 @@ public class AlbumDTO {
         return ReleaseYear;
     }
 
-    public ArtistDTO getArtist() {
+    public ArtistSimpleDTO getArtist() {
         return artist;
     }
 
