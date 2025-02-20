@@ -7,6 +7,13 @@ import org.springframework.data.jpa.repository.Query;
 import springdemo_4.springdemo_4.model.AlbumDTO;
 
 public interface AlbumRepository extends JpaRepository<Album, Long> {
-    @Query("SELECT NEW springdemo_4.springdemo_4.model.AlbumDTO(p.id, p.name, p.releaseYear) FROM Album p")
-    Page<AlbumDTO> findAlbums(Pageable pageable);
+
+//    @Query("SELECT NEW springdemo_4.springdemo_4.model.AlbumDTO(" +
+//            "a.id, a.name, a.releaseYear, " +
+//            "NEW springdemo_4.springdemo_4.model.ArtistDTO(art.id, art.name, art.monthlyListeners, null )) " +
+//            "FROM Album a " +
+//            "JOIN a.artist art")
+
+    @Query("SELECT a FROM Album a JOIN FETCH a.artist")
+    Page<Album> findAlbums(Pageable pageable);
 }

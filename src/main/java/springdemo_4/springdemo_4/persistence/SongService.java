@@ -13,12 +13,12 @@ import springdemo_4.springdemo_4.model.SongRequest;
 public class SongService {
 
     private final SongRepository songRepository;
-    private final AlbumService playlistAlbumService;
+    private final AlbumService albumService;
     private final ArtistService artistService;
 
-    public SongService(SongRepository songRepository, AlbumService playlistAlbumService, ArtistService artistService) {
+    public SongService(SongRepository songRepository, AlbumService albumService, ArtistService artistService) {
         this.songRepository = songRepository;
-        this.playlistAlbumService = playlistAlbumService;
+        this.albumService = albumService;
         this.artistService = artistService;
     }
 
@@ -27,12 +27,14 @@ public class SongService {
                 new AlbumDTO(
                         song.getAlbum().getId(),
                         song.getAlbum().getName(),
-                        song.getAlbum().getReleaseYear()
+                        song.getAlbum().getReleaseYear(),
+                        null
                 ),
                 new ArtistDTO(
                         song.getArtist().getId(),
                         song.getArtist().getName(),
-                        song.getArtist().getMonthlyListeners()
+                        song.getArtist().getMonthlyListeners(),
+                        null
                 )
         );
     }
@@ -51,7 +53,7 @@ public class SongService {
         newSong.setName(request.getName());
         newSong.setArtist(artistService.findArtist(request.getArtistId()));
         newSong.setDuration(request.getDuration());
-        newSong.setAlbum(playlistAlbumService.findAlbum(request.getAlbumId()));
+        newSong.setAlbum(albumService.findAlbum(request.getAlbumId()));
         songRepository.save(newSong);
     }
 
@@ -60,7 +62,7 @@ public class SongService {
         song.setName(request.getName());
         song.setDuration(request.getDuration());
         if (request.getAlbumId() != song.getAlbum().getId()) {
-            song.setAlbum(playlistAlbumService.findAlbum(request.getAlbumId()));
+            song.setAlbum(albumService.findAlbum(request.getAlbumId()));
         }
         if (request.getArtistId() != song.getArtist().getId()) {
             song.setArtist(artistService.findArtist(request.getArtistId()));
