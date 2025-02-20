@@ -9,6 +9,8 @@ import springdemo_4.springdemo_4.model.AlbumDTO;
 import springdemo_4.springdemo_4.model.SongDTO;
 import springdemo_4.springdemo_4.model.SongRequest;
 
+import java.util.Objects;
+
 @org.springframework.stereotype.Service
 public class SongService {
 
@@ -61,10 +63,10 @@ public class SongService {
         Song song = songRepository.findById(id).get();
         song.setName(request.getName());
         song.setDuration(request.getDuration());
-        if (request.getAlbumId() != song.getAlbum().getId()) {
+        if (!Objects.equals(request.getAlbumId(), song.getAlbum().getId())) {
             song.setAlbum(albumService.findAlbum(request.getAlbumId()));
         }
-        if (request.getArtistId() != song.getArtist().getId()) {
+        if (!Objects.equals(request.getArtistId(), song.getArtist().getId())) {
             song.setArtist(artistService.findArtist(request.getArtistId()));
         }
         songRepository.save(song);

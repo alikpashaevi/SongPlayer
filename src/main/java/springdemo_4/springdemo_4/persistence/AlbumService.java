@@ -10,6 +10,8 @@ import springdemo_4.springdemo_4.model.AlbumDTO;
 import springdemo_4.springdemo_4.model.AlbumRequest;
 import springdemo_4.springdemo_4.model.ArtistSimpleDTO;
 
+import java.util.Objects;
+
 @org.springframework.stereotype.Service
 public class AlbumService {
 
@@ -62,6 +64,9 @@ public class AlbumService {
         Album updatedAlbum = albumRepository.findById(id).get();
         updatedAlbum.setName(request.getName());
         updatedAlbum.setReleaseYear(request.getReleaseYear());
+        if(!Objects.equals(request.getArtistId(), updatedAlbum.getArtist().getId())) {
+            updatedAlbum.setArtist(artistService.findArtist(request.getArtistId()));
+        }
 
         albumRepository.save(updatedAlbum);
     }
