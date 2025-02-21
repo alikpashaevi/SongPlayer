@@ -1,40 +1,24 @@
 package springdemo_4.springdemo_4.model;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
+@Data
+@AllArgsConstructor
 public class SongRequest {
+    @NotBlank
+    @Size(min = 1, max = 120)
     private String name;
+    @NotNull
+    @Positive
     private Double duration;
+    @NotNull
+    @Positive
     private Long AlbumId;
+    @NotNull
+    @Positive
     private Long artistId;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Long getArtistId() {
-        return artistId;
-    }
-
-    public void setArtistId(Long artistId) {
-        this.artistId = artistId;
-    }
-
-    public Double getDuration() {
-        return duration;
-    }
-
-    public void setDuration(Double duration) {
-        this.duration = duration;
-    }
-
-    public Long getAlbumId() {
-        return AlbumId;
-    }
-
-    public void setAlbumId(Long AlbumId) {
-        this.AlbumId = AlbumId;
-    }
 }
