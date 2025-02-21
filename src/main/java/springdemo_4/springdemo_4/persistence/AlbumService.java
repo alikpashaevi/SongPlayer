@@ -1,11 +1,13 @@
 package springdemo_4.springdemo_4.persistence;
 
+import org.hibernate.annotations.NotFound;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import springdemo_4.springdemo_4.entity.Album;
 import springdemo_4.springdemo_4.entity.AlbumRepository;
 import springdemo_4.springdemo_4.entity.Artist;
+import springdemo_4.springdemo_4.error.NotFoundException;
 import springdemo_4.springdemo_4.model.AlbumDTO;
 import springdemo_4.springdemo_4.model.AlbumRequest;
 import springdemo_4.springdemo_4.model.ArtistSimpleDTO;
@@ -21,6 +23,10 @@ public class AlbumService {
     public AlbumService(AlbumRepository albumRepository, ArtistService artistService) {
         this.albumRepository = albumRepository;
         this.artistService = artistService;
+    }
+
+    private NotFoundException buildNotFoundException(long id) {
+        return new NotFoundException("Album with id " + id + " not found");
     }
 
     public Page<AlbumDTO> getAlbums(int page, int pageSize) {
@@ -49,7 +55,7 @@ public class AlbumService {
     }
 
     public Album findAlbum(Long id) {
-        return albumRepository.findById(id).get();
+        return albumRepository.findById(id).orElseThrow(() -> buildNotFoundException(id));
     }
 
     public void createAlbum(AlbumRequest request) {
@@ -61,7 +67,7 @@ public class AlbumService {
     }
 
     public void updateAlbum(Long id, AlbumRequest request) {
-        Album updatedAlbum = albumRepository.findById(id).get();
+        Album updatedAlbum = albumRepository.findById(id).orElseThrow(() -> buildNotFoundException(id));
         updatedAlbum.setName(request.getName());
         updatedAlbum.setReleaseYear(request.getReleaseYear());
         if(!Objects.equals(request.getArtistId(), updatedAlbum.getArtist().getId())) {

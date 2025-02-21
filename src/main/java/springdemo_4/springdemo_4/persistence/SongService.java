@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import springdemo_4.springdemo_4.entity.Song;
 import springdemo_4.springdemo_4.entity.SongRepository;
+import springdemo_4.springdemo_4.error.NotFoundException;
 import springdemo_4.springdemo_4.model.ArtistDTO;
 import springdemo_4.springdemo_4.model.AlbumDTO;
 import springdemo_4.springdemo_4.model.SongDTO;
@@ -22,6 +23,10 @@ public class SongService {
         this.songRepository = songRepository;
         this.albumService = albumService;
         this.artistService = artistService;
+    }
+
+    private NotFoundException buildNotFoundException(long id) {
+        return new NotFoundException("Song with id " + id + " not found");
     }
 
     private SongDTO mapSong(Song song) {
@@ -46,7 +51,7 @@ public class SongService {
     }
 
     public SongDTO getSong(Long id) {
-        Song song = songRepository.findById(id).get();
+        Song song = songRepository.findById(id).orElseThrow(() -> buildNotFoundException(id));
         return mapSong(song);
     }
 
@@ -60,7 +65,7 @@ public class SongService {
     }
 
     public void updateSong(Long id, SongRequest request) {
-        Song song = songRepository.findById(id).get();
+        Song song = songRepository.findById(id).orElseThrow(() -> buildNotFoundException(id));
         song.setName(request.getName());
         song.setDuration(request.getDuration());
         if (!Objects.equals(request.getAlbumId(), song.getAlbum().getId())) {

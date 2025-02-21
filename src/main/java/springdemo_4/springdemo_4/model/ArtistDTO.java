@@ -10,5 +10,5 @@ public class ArtistDTO {
     private Long id;
     private String name;
     private String monthlyListeners;
-    private List<AlbumDTO> albums;
+    private List<AlbumSimpleDTO> albums;
 }

@@ -1,15 +1,14 @@
 package springdemo_4.springdemo_4.persistence;
 
+import org.hibernate.annotations.NotFound;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import springdemo_4.springdemo_4.entity.Album;
 import springdemo_4.springdemo_4.entity.Artist;
 import springdemo_4.springdemo_4.entity.ArtistRepository;
-import springdemo_4.springdemo_4.model.AlbumDTO;
-import springdemo_4.springdemo_4.model.ArtistDTO;
-import springdemo_4.springdemo_4.model.ArtistRequest;
-import springdemo_4.springdemo_4.model.ArtistSimpleDTO;
+import springdemo_4.springdemo_4.error.NotFoundException;
+import springdemo_4.springdemo_4.model.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,6 +20,10 @@ public class ArtistService {
 
     public ArtistService(ArtistRepository artistRepository) {
         this.artistRepository = artistRepository;
+    }
+
+    private NotFoundException buildNotFoundException(long id) {
+        return new NotFoundException("Artist with id " + id + " not found");
     }
 
     public Page<ArtistDTO> getArtists(int page, int pageSize) {
@@ -41,11 +44,10 @@ public class ArtistService {
                 artist.getName(),
                 artist.getMonthlyListeners(),
                 artist.getAlbums().stream()
-                        .map(album -> new AlbumDTO(
+                        .map(album -> new AlbumSimpleDTO(
                                 album.getId(),
                                 album.getName(),
-                                album.getReleaseYear(),
-                                artistSimpleDTO
+                                album.getReleaseYear()
                         ))
                         .collect(Collectors.toList())
         );
@@ -54,7 +56,7 @@ public class ArtistService {
 
 
     public Artist findArtist(Long id) {
-        return artistRepository.findById(id).get();
+        return artistRepository.findById(id).orElseThrow(() -> buildNotFoundException(id));
     }
 
     public void createArtist(ArtistRequest request) {
@@ -66,7 +68,7 @@ public class ArtistService {
     }
 
     public void updateArtist(Long id, ArtistRequest request) {
-        Artist updatedArtist = artistRepository.findById(id).get();
+        Artist updatedArtist = artistRepository.findById(id).orElseThrow(() -> buildNotFoundException(id));
         updatedArtist.setName(request.getName());
         updatedArtist.setMonthlyListeners(request.getMonthlyListeners());
 
