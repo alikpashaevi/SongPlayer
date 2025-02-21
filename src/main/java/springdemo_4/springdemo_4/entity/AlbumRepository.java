@@ -14,6 +14,6 @@ public interface AlbumRepository extends JpaRepository<Album, Long> {
 //            "FROM Album a " +
 //            "JOIN a.artist art")
 
-    @Query("SELECT a FROM Album a JOIN FETCH a.artist")
+    @Query("SELECT a FROM Album a JOIN FETCH a.artist LEFT JOIN FETCH a.songs")
     Page<Album> findAlbums(Pageable pageable);
 }

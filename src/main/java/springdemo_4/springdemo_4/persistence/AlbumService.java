@@ -11,6 +11,7 @@ import springdemo_4.springdemo_4.error.NotFoundException;
 import springdemo_4.springdemo_4.model.AlbumDTO;
 import springdemo_4.springdemo_4.model.AlbumRequest;
 import springdemo_4.springdemo_4.model.ArtistSimpleDTO;
+import springdemo_4.springdemo_4.model.SongSimpleDTO;
 
 import java.util.Objects;
 
@@ -50,7 +51,10 @@ public class AlbumService {
                 album.getId(),
                 album.getName(),
                 album.getReleaseYear(),
-                artistSimpleDTO
+                artistSimpleDTO,
+                album.getSongs().stream()
+                        .map(song -> new SongSimpleDTO(song.getId(), song.getName(), song.getDuration()))
+                        .toList()
         );
     }
 
