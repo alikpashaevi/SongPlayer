@@ -8,6 +8,6 @@ public class SongDTO {
     private Long id;
     private String name;
     private Double duration;
-    private AlbumDTO album;
-    private ArtistDTO artist;
+    private AlbumSimpleDTO album;
+    private ArtistSimpleDTO artist;
 }

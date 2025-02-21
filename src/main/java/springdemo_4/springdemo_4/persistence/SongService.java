@@ -5,10 +5,7 @@ import org.springframework.data.domain.PageRequest;
 import springdemo_4.springdemo_4.entity.Song;
 import springdemo_4.springdemo_4.entity.SongRepository;
 import springdemo_4.springdemo_4.error.NotFoundException;
-import springdemo_4.springdemo_4.model.ArtistDTO;
-import springdemo_4.springdemo_4.model.AlbumDTO;
-import springdemo_4.springdemo_4.model.SongDTO;
-import springdemo_4.springdemo_4.model.SongRequest;
+import springdemo_4.springdemo_4.model.*;
 
 import java.util.Objects;
 
@@ -31,17 +28,15 @@ public class SongService {
 
     private SongDTO mapSong(Song song) {
         return new SongDTO(song.getId(), song.getName(), song.getDuration(),
-                new AlbumDTO(
+                new AlbumSimpleDTO(
                         song.getAlbum().getId(),
                         song.getAlbum().getName(),
-                        song.getAlbum().getReleaseYear(),
-                        null
+                        song.getAlbum().getReleaseYear()
                 ),
-                new ArtistDTO(
+                new ArtistSimpleDTO(
                         song.getArtist().getId(),
                         song.getArtist().getName(),
-                        song.getArtist().getMonthlyListeners(),
-                        null
+                        song.getArtist().getMonthlyListeners()
                 )
         );
     }
