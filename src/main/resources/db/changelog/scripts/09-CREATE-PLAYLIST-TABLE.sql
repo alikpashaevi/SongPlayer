@@ -1,0 +1,9 @@
+CREATE TABLE songs.playlist (
+    ID BIGINT NOT NULL PRIMARY KEY,
+    NAME VARCHAR(255) NOT NULL
+);
+
+
+CREATE SEQUENCE songs.playlist_seq
+    INCREMENT 1
+    START 1000;

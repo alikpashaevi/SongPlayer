@@ -5,6 +5,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "song")
 @SequenceGenerator(name = "song_seq_gen", sequenceName = "song_seq", allocationSize = 1)
@@ -29,5 +32,8 @@ public class Song {
     @ManyToOne
     @JoinColumn(name = "artist_id")
     private Artist artist;
+
+    @ManyToMany(mappedBy = "songs")
+    private List<Playlist> playlists = new ArrayList<>();
 
 }
