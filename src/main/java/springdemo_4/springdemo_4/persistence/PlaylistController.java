@@ -18,9 +18,29 @@ public class PlaylistController {
         return playlistService.getPlaylists(page, pageSize);
     }
 
+    @GetMapping("/{id}")
+    public PlaylistDTO getPlaylist(@PathVariable Long id) {
+        return playlistService.getPlaylist(id);
+    }
+
     @PostMapping
     public void createPlaylist(@RequestBody PlaylistRequest request) {
         playlistService.createPlaylist(request);
+    }
+
+    @PostMapping("/{playlistId}/songs/{songId}")
+    public void addSongToPlaylist(@PathVariable Long playlistId, @PathVariable Long songId) {
+        playlistService.addSongToPlaylist(playlistId, songId);
+    }
+
+    @PutMapping("/{id}")
+    public void updatePlaylist(@PathVariable Long id, @RequestBody PlaylistRequest request) {
+        playlistService.updatePlaylist(id, request);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deletePlaylist(@PathVariable Long id) {
+        playlistService.deletePlaylist(id);
     }
 
 }

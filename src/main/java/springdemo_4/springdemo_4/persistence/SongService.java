@@ -1,7 +1,10 @@
 package springdemo_4.springdemo_4.persistence;
 
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
+import springdemo_4.springdemo_4.entity.ArtistRepository;
 import springdemo_4.springdemo_4.entity.Song;
 import springdemo_4.springdemo_4.entity.SongRepository;
 import springdemo_4.springdemo_4.error.NotFoundException;
@@ -9,18 +12,13 @@ import springdemo_4.springdemo_4.model.*;
 
 import java.util.Objects;
 
-@org.springframework.stereotype.Service
+@Service
+@AllArgsConstructor
 public class SongService {
 
     private final SongRepository songRepository;
     private final AlbumService albumService;
     private final ArtistService artistService;
-
-    public SongService(SongRepository songRepository, AlbumService albumService, ArtistService artistService) {
-        this.songRepository = songRepository;
-        this.albumService = albumService;
-        this.artistService = artistService;
-    }
 
     private NotFoundException buildNotFoundException(long id) {
         return new NotFoundException("Song with id " + id + " not found");
@@ -45,6 +43,10 @@ public class SongService {
         return songRepository.findSongs(PageRequest.of(page, pageSize));
     }
 
+    public Song findSongForOthers(Long songId) {
+        return songRepository.findById(songId).orElseThrow(() -> buildNotFoundException(songId));
+    }
+
     public SongDTO getSong(Long id) {
         Song song = songRepository.findById(id).orElseThrow(() -> buildNotFoundException(id));
         return mapSong(song);
@@ -53,9 +55,9 @@ public class SongService {
     public void addSong(SongRequest request) {
         Song newSong = new Song();
         newSong.setName(request.getName());
-        newSong.setArtist(artistService.findArtist(request.getArtistId()));
+        newSong.setArtist(artistService.findArtistForOthers(request.getArtistId()));
         newSong.setDuration(request.getDuration());
-        newSong.setAlbum(albumService.findAlbum(request.getAlbumId()));
+        newSong.setAlbum(albumService.findAlbumForOthers(request.getAlbumId()));
         songRepository.save(newSong);
     }
 
@@ -64,10 +66,10 @@ public class SongService {
         song.setName(request.getName());
         song.setDuration(request.getDuration());
         if (!Objects.equals(request.getAlbumId(), song.getAlbum().getId())) {
-            song.setAlbum(albumService.findAlbum(request.getAlbumId()));
+            song.setAlbum(albumService.findAlbumForOthers(request.getAlbumId()));
         }
         if (!Objects.equals(request.getArtistId(), song.getArtist().getId())) {
-            song.setArtist(artistService.findArtist(request.getArtistId()));
+            song.setArtist(artistService.findArtistForOthers(request.getArtistId()));
         }
         songRepository.save(song);
     }
@@ -75,7 +77,4 @@ public class SongService {
     public void deleteSong(Long id) {
         songRepository.deleteById(id);
     }
-
-
-
 }

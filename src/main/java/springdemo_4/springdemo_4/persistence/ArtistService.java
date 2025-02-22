@@ -53,10 +53,13 @@ public class ArtistService {
         );
     }
 
-
-
-    public Artist findArtist(Long id) {
+    public Artist findArtistForOthers(Long id) {
         return artistRepository.findById(id).orElseThrow(() -> buildNotFoundException(id));
+    }
+
+    public ArtistDTO findArtist(Long id) {
+        Artist artist = artistRepository.findById(id).orElseThrow(() -> buildNotFoundException(id));
+        return convertToArtistDTO(artist);
     }
 
     public void createArtist(ArtistRequest request) {

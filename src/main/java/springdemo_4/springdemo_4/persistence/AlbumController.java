@@ -18,12 +18,12 @@ public class AlbumController {
     }
 
     @GetMapping
-    public Page<AlbumDTO> getAlbums(int page, int pageSize) {
+    public Page<AlbumDTO> getAlbums(@RequestParam int page,@RequestParam int pageSize) {
         return albumService.getAlbums(page, pageSize);
     }
 
     @GetMapping("/{id}")
-    public Album getAlbum(Long id) {
+    public AlbumDTO getAlbum(@PathVariable Long id) {
         return albumService.findAlbum(id);
     }
 

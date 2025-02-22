@@ -22,7 +22,7 @@ public class ArtistController {
     }
 
     @GetMapping("/{id}")
-    public Artist getArtist(Long id) {
+    public ArtistDTO getArtist(@PathVariable Long id) {
         return artistService.findArtist(id);
     }
 
