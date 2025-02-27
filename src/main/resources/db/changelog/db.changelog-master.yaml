@@ -19,3 +19,7 @@ databaseChangeLog:
         file: db/changelog/scripts/09-CREATE-PLAYLIST-TABLE.sql
   - include:
         file: db/changelog/scripts/10-CREATE-JUNCTION-TABLE-FOR-SONG-AND-PLAYLIST.sql
+  - include:
+        file: db/changelog/scripts/11-CREATE-USERS-AND-ROLES.sql
+  - include:
+        file: db/changelog/scripts/12-ADD-ROLES.sql

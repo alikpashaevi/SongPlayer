@@ -1,6 +1,7 @@
 package springdemo_4.springdemo_4.persistence;
 
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.NotFound;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,7 +20,7 @@ import springdemo_4.springdemo_4.model.SongSimpleDTO;
 import java.util.Objects;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class AlbumService {
 
     private final AlbumRepository albumRepository;

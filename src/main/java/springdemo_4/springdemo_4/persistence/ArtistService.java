@@ -1,5 +1,6 @@
 package springdemo_4.springdemo_4.persistence;
 
+import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.NotFound;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,13 +15,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class ArtistService {
 
     private final ArtistRepository artistRepository;
-
-    public ArtistService(ArtistRepository artistRepository) {
-        this.artistRepository = artistRepository;
-    }
 
     private NotFoundException buildNotFoundException(long id) {
         return new NotFoundException("Artist with id " + id + " not found");

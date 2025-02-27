@@ -7,3 +7,5 @@ spring:
   liquibase:
     change-log: classpath:/db/changelog/db.changelog-master.yaml
     default-schema: songs
+jwt:
+  secret-key: ${JAVA_COURSE_JWT_KEY}

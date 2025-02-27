@@ -1,14 +1,18 @@
 package springdemo_4.springdemo_4.persistence;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import springdemo_4.springdemo_4.model.PlaylistDTO;
 import springdemo_4.springdemo_4.model.PlaylistRequest;
 
+import static springdemo_4.springdemo_4.constants.AuthorizationConstants.USER_OR_ARTIST_OR_ADMIN;
+
 @RestController
 @RequestMapping("/playlists")
-@AllArgsConstructor
+@RequiredArgsConstructor
+@PreAuthorize(USER_OR_ARTIST_OR_ADMIN)
 public class PlaylistController {
 
     private final PlaylistService playlistService;

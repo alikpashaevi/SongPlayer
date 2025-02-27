@@ -1,20 +1,21 @@
 package springdemo_4.springdemo_4.persistence;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import springdemo_4.springdemo_4.entity.Artist;
 import springdemo_4.springdemo_4.model.ArtistDTO;
 import springdemo_4.springdemo_4.model.ArtistRequest;
 
+import static springdemo_4.springdemo_4.constants.AuthorizationConstants.ADMIN;
+
 @RestController
 @RequestMapping("/artists")
+@RequiredArgsConstructor
+@PreAuthorize(ADMIN)
 public class ArtistController {
 
     private final ArtistService artistService;
-
-    public ArtistController(ArtistService artistService) {
-        this.artistService = artistService;
-    }
 
     @GetMapping
     public Page<ArtistDTO> getArtists(@RequestParam int page, @RequestParam int pageSize) {
