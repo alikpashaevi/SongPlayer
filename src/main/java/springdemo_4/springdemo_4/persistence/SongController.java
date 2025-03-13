@@ -1,6 +1,7 @@
 package springdemo_4.springdemo_4.persistence;
 
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -9,8 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import springdemo_4.springdemo_4.model.SongDTO;
 import springdemo_4.springdemo_4.model.SongRequest;
 
-import static springdemo_4.springdemo_4.constants.AuthorizationConstants.ARTIST_OR_ADMIN;
-import static springdemo_4.springdemo_4.constants.AuthorizationConstants.USER_OR_ARTIST_OR_ADMIN;
+import static springdemo_4.springdemo_4.security.AuthorizationConstants.ARTIST_OR_ADMIN;
+import static springdemo_4.springdemo_4.security.AuthorizationConstants.USER_OR_ARTIST_OR_ADMIN;
 
 @RestController
 @RequiredArgsConstructor
@@ -33,14 +34,14 @@ public class SongController {
 
     @PostMapping
     @PreAuthorize(ARTIST_OR_ADMIN)
-    public ResponseEntity<Object> addSong(@RequestBody SongRequest request) {
+    public ResponseEntity<Object> addSong(@RequestBody @Valid SongRequest request) {
         songService.addSong(request);
         return ResponseEntity.ok("Song added successfully");
     }
 
     @PutMapping("/{id}")
     @PreAuthorize(ARTIST_OR_ADMIN)
-    public ResponseEntity<Object> updateSong(@PathVariable Long id, @RequestBody SongRequest request) {
+    public ResponseEntity<Object> updateSong(@PathVariable Long id, @RequestBody @Valid SongRequest request) {
         songService.updateSong(id, request);
         return ResponseEntity.ok("Song updated successfully");
     }

@@ -10,13 +10,13 @@ import java.util.Set;
 
 @Entity
 @Table(name = "app_user", schema = "songs")
-@SequenceGenerator(name = "app_user_seq_gen", sequenceName = "app_user_seq", allocationSize = 1)
+@SequenceGenerator(name = "user_seq_gen", sequenceName = "user_seq", allocationSize = 1)
 @Getter
 @Setter
 public class AppUser {
 
     @Id
-    @GeneratedValue(generator = "app_user_seq_gen", strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(generator = "user_seq_gen", strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Column(name = "username")

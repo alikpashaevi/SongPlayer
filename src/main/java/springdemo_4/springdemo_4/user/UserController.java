@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import springdemo_4.springdemo_4.user.model.UserRequest;
 
-import static springdemo_4.springdemo_4.constants.AuthorizationConstants.ADMIN;
+import static springdemo_4.springdemo_4.security.AuthorizationConstants.ADMIN;
 
 @RestController
 @RequestMapping("/users")

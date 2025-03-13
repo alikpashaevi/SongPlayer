@@ -1,5 +1,6 @@
 package springdemo_4.springdemo_4.persistence;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -7,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import springdemo_4.springdemo_4.model.PlaylistDTO;
 import springdemo_4.springdemo_4.model.PlaylistRequest;
 
-import static springdemo_4.springdemo_4.constants.AuthorizationConstants.USER_OR_ARTIST_OR_ADMIN;
+import static springdemo_4.springdemo_4.security.AuthorizationConstants.USER_OR_ARTIST_OR_ADMIN;
 
 @RestController
 @RequestMapping("/playlists")
@@ -28,7 +29,7 @@ public class PlaylistController {
     }
 
     @PostMapping
-    public void createPlaylist(@RequestBody PlaylistRequest request) {
+    public void createPlaylist(@RequestBody @Valid PlaylistRequest request) {
         playlistService.createPlaylist(request);
     }
 
@@ -38,7 +39,7 @@ public class PlaylistController {
     }
 
     @PutMapping("/{id}")
-    public void updatePlaylist(@PathVariable Long id, @RequestBody PlaylistRequest request) {
+    public void updatePlaylist(@PathVariable Long id, @RequestBody @Valid PlaylistRequest request) {
         playlistService.updatePlaylist(id, request);
     }
 
